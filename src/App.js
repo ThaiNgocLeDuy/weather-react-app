@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import CitySelector from './components/CitySelector.jsx';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1>Weather App</h1>
+        {/* <WeatherCard 
+          dt={1602104400 * 1000} 
+          temp_min="28" 
+          temp_max="30"
+          main="Hot"
+          icon="01d"
+        /> */}
+        <CitySelector />
     </div>
   );
 }
