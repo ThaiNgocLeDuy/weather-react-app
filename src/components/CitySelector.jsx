@@ -1,39 +1,40 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {API_KEY, API_BASE_URL} from './../apis/config';
 
-CitySelector.propTypes = {};
+CitySelector.propTypes = {
+  handleSearch: PropTypes.func,
+};
 
 function CitySelector(props) {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState('');
 
-  const handleSearch = () => {
-    fetch(`${API_BASE_URL}/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`)
-    .then((response) => response.json())
-    .then((result) => console.log(result));
+  const {handleSearch} = props;
+
+  const onSearch = () => {
+    handleSearch(city);
     setCity('');
   }
 
-  const handleEnter = (event) => {
-    if (event.key === 'Enter') handleSearch();
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') onSearch();
   }
 
   return (
     <>
       <div className="row">
         <div className="col-12">
-          <h1>Search your city</h1>
+          <h1>Nhập tên thành phố</h1>
         </div>
       </div>
       <div className="row">
         <div className="col-12 text-center mt-3 mb-3">
           <input
             type="text"
-            placeholder="Enter city's name"
+            placeholder="Nhập tên thành phố"
             className="text-center"
             onChange={(e) => setCity(e.target.value)}
             value={city}
-            onKeyPress={handleEnter}
+            onKeyPress={onKeyPress}
           />
         </div>
       </div>
@@ -42,9 +43,9 @@ function CitySelector(props) {
           <button 
           type="submit" 
           className="btn btn-primary"
-          onClick={handleSearch}
+          onClick={() => onSearch(city)}
           >
-            Check Weather
+            Kiểm tra nhiệt độ
           </button>
         </div>
       </div>
